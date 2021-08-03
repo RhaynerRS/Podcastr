@@ -5,7 +5,8 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { api } from "../services/api"
 import Link from 'next/link'
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString"
-
+import {useContext} from 'react'
+import { PlayerContext } from '../context/PlayerContext'
 import styles from "./home.module.scss"
 
 type Episode = {
@@ -27,6 +28,9 @@ type HomeProps = {
 
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+
+  const {play} = useContext(PlayerContext)
+
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
@@ -48,7 +52,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
-                <button>
+                <button onClick={() => play(episode)}>
                   <img src="/play-green.svg" />
                 </button>
               </li>
@@ -69,21 +73,21 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             </thead>
             <tbody>
               {allEpisodes.map((episode) => {
-                return(
+                return (
                   <tr key={episode.id}>
-                    <td style={{width:72}}><Image 
-                    src={episode.thumbnail} 
-                    width="192px" 
-                    height="192px"
-                    objectFit='cover'/> 
+                    <td style={{ width: 72 }}><Image
+                      src={episode.thumbnail}
+                      width="192px"
+                      height="192px"
+                      objectFit='cover' />
                     </td>
                     <td><Link href={`episodes/${episode.id}`}><a >{episode.title}</a></Link></td>
                     <td>{episode.members}</td>
-                    <td style={{width:100}}>{episode.publishedAt}</td>
+                    <td style={{ width: 100 }}>{episode.publishedAt}</td>
                     <td>{episode.durationAsString}</td>
-                    <td><button>
-                  <img src="/play-green.svg" />
-                </button></td>
+                    <td><button onClick={() => play(episode)}>
+                      <img src="/play-green.svg" />
+                    </button></td>
                   </tr>
                 )
               })}
