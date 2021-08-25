@@ -10,8 +10,8 @@
     "server": "json-server server.json -w -d 750 -p 3333"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "axios": "^0.21.1",
     "babel-plugin-macros": "^3.1.0",
